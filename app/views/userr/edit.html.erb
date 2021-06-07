@@ -1,0 +1,98 @@
+<%= link_to("BACK", userr_index_path, :class => 'back-link')%>
+
+
+<div>
+  <h1>Create Profile</h1>
+  <%= form_for(@user,:url => userr_path(@user.id),:method => 'patch')do |f| %>
+  <table>
+
+
+  <tr>
+  <th> Username </th>
+  <td> <%= f.text_field :name %> </td>
+  
+  <th> Email </th>
+  <td> <%= f.text_field :email, readonly: true, disable: true %> </td>
+  </div>
+  </tr>
+  
+  <%= f.fields_for :profile, @user.profile do |ff| %>
+    <tr>
+        <th> Enter First Name </th>
+        <td><%= ff.text_field(:first_name)%></td>
+    </tr>
+    <tr>
+        <th> Enter Last Name </th>
+        <td><%= ff.text_field(:last_name)%></td>
+    </tr>
+
+    <tr>
+        <th> Enter DOB </th>
+        <td><%= ff.text_field(:dob)%></td>
+    </tr>
+    <tr>
+        <th> Enter Mobile Number </th>
+        <td><%= ff.text_field(:mob_no)%></td>
+    </tr>
+    <tr>
+        <th> Enter Address </th>
+        <td><%= ff.text_field(:address)%></td>
+    </tr>
+
+    <% end %>
+
+  <%= f.fields_for :picture, @user.build_picture do |ff| %>
+    <tr>
+      <th> Picture Name </th>
+      <td><%= ff.text_field(:name)%></td>
+    </tr>
+    <tr>
+      <th> Choose Image </th>
+      <td><%= ff.file_field :image %></td>
+    </tr>
+  <% end %>
+
+
+  </table>
+  <div>
+    <%= f.submit("Update Profile")%>
+  </div>
+  <%end%>
+</div>
+
+
+<% if @user.type == "Employee" %>
+
+<h1> Skills Dashboard </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @user.employee_skills.each do |skill| %>
+      <tr>
+        <td><%= skill.skill.name %></td>
+        <td><%= link_to("Delete ",delete_employee_skills_userr_path(@user.id,skill.id) )%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1> Add Skill </h1>
+<%= form_with model: @user.employee_skills.new , url: add_employee_skills_userr_path do |form| %>
+
+    <div> 
+    <%= form.collection_check_boxes :skill_id, Skill.all, :id, :name %> 
+    </div>
+
+    <div class="actions">
+      <%= form.submit("Update Skill") %>
+    </div>
+
+  <% end %>
+<% end %>

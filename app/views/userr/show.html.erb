@@ -1,0 +1,66 @@
+<%= link_to("Goto Home Page ", userr_index_path, :class => 'back-link')%>
+<div>
+  <h1>User <%= @user.type %> </h1>
+  <table class="styled-table">
+    <tr>
+      <th>User Id :- </th>
+      <td><%= @user.id %></td>
+    </tr>
+  <tr>
+    <th>User Type :- </th>
+    <td><%= @user.type %></td>
+  </tr>
+    <tr>
+      <th>User Name :- </th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>User Email :- </th>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h1>User Profile</h1>
+  <table>
+    <tr>
+      <th>User Id :- </th>
+      <td><%= @user.profile.id %></td>
+    </tr>
+    <tr>
+      <th>First Name :- </th>
+      <td><%= @user.profile.first_name %></td>
+    </tr>
+    <tr>
+      <th>Last Name :- </th>
+      <td><%= @user.profile.last_name %></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>DOB :- </th>
+      <td><%= @user.profile.dob %></td>
+    </tr>
+    <tr>
+      <th>Mobile Number :- </th>
+      <td><%= @user.profile.mob_no %></td>
+    </tr>
+    <tr>
+      <th>Address :- </th>
+      <td><%= @user.profile.address %></td>
+    </tr>
+
+    <% if @user.picture!= nil%>
+      <% if @user.picture.image.attached? %>
+      <tr>
+      <th> My Picture :- </th>
+      <td><%= image_tag @user.picture.image %></td>
+      </tr>
+      <% end %>
+    <% end %>
+
+  </table>
+</div>
+
+<%=link_to(" Edit",edit_userr_path(@user.id),:class=>'action edit')%>
+<%=link_to(" Delete ",delete_userr_path(@user.id),:class=>'action delete')%>

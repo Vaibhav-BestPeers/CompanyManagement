@@ -1,0 +1,51 @@
+
+<%= link_to 'Back to Home',userr_index_path(params[:user_id]), method: :get %>
+
+<ul>
+    <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+</ul>
+
+<div>
+  <h1>Create Profile Testing</h1>
+  <%= form_for(@user.profile,:url => userr_index_path(@user.id,@profile),:method => 'post')do |f| %>
+  <table>
+    <tr>
+        <th> Enter First Name </th>
+        <td><%= f.text_field(:first_name)%></td>
+    </tr>
+    <tr>
+        <th> Enter Last Name </th>
+        <td><%= f.text_field(:last_name)%></td>
+    </tr>
+    <tr>
+        <th> Enter DOB </th>
+        <td><%= f.date_field(:dob)%></td>
+    </tr>
+    <tr>
+        <th> Enter Mobile Number </th>
+        <td><%= f.text_field(:mob_no)%></td>
+    </tr>
+    <tr>
+        <th> Enter Address </th>
+        <td><%= f.text_field(:address)%></td>
+    </tr>
+
+    <%= f.fields_for :picture, @user.build_picture do |ff| %>
+      <tr>
+        <th> Picture Name </th>
+        <td><%= ff.text_field(:name)%></td>
+      </tr>
+      <tr>
+        <th> Choose Image </th>
+        <td><%= ff.file_field :image %></td>
+      </tr>
+    <% end %>
+
+  </table>
+  <div>
+    <%= f.submit("Create Profiles")%>
+  </div>
+  <%end%>
+</div>

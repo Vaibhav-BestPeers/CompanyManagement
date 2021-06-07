@@ -1,0 +1,63 @@
+<%=link_to(" Show details ",userr_path(@user.id),:class=>'action show')%>
+<%= button_to 'Chat with buddies', userr_chatting_index_path(@user.id), method: :get %>
+
+<% if @user.type == "Employee"%>
+
+<h1> Employee Dashboard </h1>
+
+<p>Welcome to Employee</p>
+
+<% elsif @user.type == "Admin" %>
+
+<h1> Admin Dashboard </h2>
+<p>Welcome to Admin</p>
+
+<% @employee = Employee.all %>
+<h1>Employees Details </h1>
+<table style="width:100%">
+  <tr class="header">
+    <th>#</th>
+    <th> Employee ID </th>
+    <th> Employee Name </th>
+		<th> Employee Email </th>
+    <th> First Name </th>
+    <th> Last Name </th>
+    <th> DOB</th>
+    <th> Mobile Number </th>
+    <th> Address </th>
+    <th> Skills </th>
+    <th> Action </th>
+    <br><br>
+  </tr>
+  <% @employee.each do |employee|%>
+  <tr>
+    <td>  
+      <% if employee.picture %>
+        <% if employee.picture.image.attached? %>
+          <%= image_tag employee.picture.image, style: "width: 70px; border: 4px solid black; display: block" %>
+        <% end %>
+      <% end %>
+   </td>
+
+    <td><%= employee.id %></td> 
+    <td><%= employee.name%></td>
+		<td><%= employee.email%></td>
+
+    <%if employee.profile != nil %>
+    <td><%= employee.profile.first_name %></td>
+    <td><%= employee.profile.last_name %></td>
+    <td><%= employee.profile.dob%></td>
+    <td><%= employee.profile.mob_no%></td>
+    <td><%= employee.profile.address%></td>
+    <td>
+    <%end%>
+    
+    	<%=link_to(" Edit",edit_userr_path(employee.id),:class=>'action edit')%>
+      <%=link_to(" Delete ",delete_userr_path(employee.id),:class=>'action delete')%>
+    <td>
+    <br>
+  </tr>
+  <%end%>
+</table>
+
+<% end %>

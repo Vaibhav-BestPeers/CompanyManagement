@@ -1,0 +1,12 @@
+<%= link_to("BACK", userr_index_path, :class => 'back-link')%>
+<div>
+  <h1>Delete Profile Details</h1>
+  <%= form_for(@profile,:url => userr_path(@user.id),:method => 'delete')do |f| %>
+  <p>Are you sure you want to delete  <b> <%= @profile.user.name%> , <%= @profile.first_name%> </b> </p>
+
+
+  <div>
+    <%= f.submit("Delete Details")%>
+  </div>
+  <%end%>
+</div>

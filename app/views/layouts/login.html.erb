@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BestPeersPro</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'login', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <%= render 'layouts/nav' %>
+
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+   
+
+    <p class="navbar-text float-right">
+<% if user_signed_in? %>
+
+  <% if current_user.picture %>
+    <% if current_user.picture.image.attached? %>
+      <%= image_tag current_user.picture.image, style: "width: 70px; border: 4px solid black; display: block" %>
+    <% end %>
+  <% end %>
+
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+  <%= link_to "Logout", custom_path_sign_out_path, :class => 'navbar-link'  %>
+<% else %>
+
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+<% end %>
+</p> 
+
+<%= yield %>
+  </body>
+</html>
