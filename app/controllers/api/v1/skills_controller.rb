@@ -1,10 +1,12 @@
 class Api::V1::SkillsController < Api::V1::ApiController       
     before_action :current_user
     before_action :user_type, only: [:create,:update,:destroy]
-    
+
+    respond_to :json
+
     def index 
         @skills = Skill.all 
-        # render json: @skills
+        # render json: @skills, status: 200
     end 
         
 
@@ -13,31 +15,31 @@ class Api::V1::SkillsController < Api::V1::ApiController
         # render json: {data: @skill, Current_User: current_user.name}, status: 200
     end 
     
-    def create 
+    def create
         @skill= Skill.new(user_params)
-        if @skill.save 
-            render json: @skill 
+        if @skill.save
+            # render json: @skill ,status: 201
         else 
             render error: {error: 'Unable to create Skill.' }, status: 400 
         end 
     end 
     
-    def update 
+    def update
         @skill= Skill.find(params[:id]) 
         if @skill 
-            @skill.update(user_params) 
-            render json: { message: 'Skill successfully updated.' }, status: 200
+            @skill.update(user_params)
+            # render json: { message: 'Skill successfully updated.' }, status: 200
          else 
             render json: { error: 'Unable to update Skill.'} , status:400 
         end 
     end 
     
-    def destroy 
+    def destroy
         @skill = Skill.find(params[:id])
 
          if @skill
             @skill.destroy
-            render json: { message: 'Skill successfully deleted.' }, status: 200 
+            # render json: { message: 'Skill successfully deleted.' }, status: 200 
         else 
             render json: { error: 'Unable to delete Skill.' }, status: 400
         end 
