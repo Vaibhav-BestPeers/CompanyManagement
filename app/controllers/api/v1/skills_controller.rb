@@ -17,10 +17,12 @@ class Api::V1::SkillsController < Api::V1::ApiController
     
     def create
         @skill= Skill.new(user_params)
+
         if @skill.save
             # render json: @skill ,status: 201
-        else 
-            render error: {error: 'Unable to create Skill.' }, status: 400 
+            # render 'create.json.jbuilder', status: 201  # For override status code
+        else
+            render json: {error: 'Unable to create Skill.' }, status: 400 
         end 
     end 
     
