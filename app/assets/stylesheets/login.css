@@ -1,7 +1,7 @@
-
+@import 'bootstrap/dist/css/bootstrap';
 
 body {
     
-    background-color: rgb(181, 201, 231);
+    background-color: rgb(114, 60, 145);
     background-image: url('/assets/b.jpg')
    }

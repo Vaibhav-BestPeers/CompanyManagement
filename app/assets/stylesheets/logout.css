@@ -1,6 +1,6 @@
-
+@import 'bootstrap/dist/css/bootstrap';
 
 body {
-    background-color: powderblue;
+    background-color: rgb(86, 202, 105);
     background-image: url('/assets/a.jpg')
    }
